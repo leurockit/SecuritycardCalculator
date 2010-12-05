@@ -1,0 +1,99 @@
+<html>
+<head>
+<script language="javascript">
+var codes;
+function initialize(){
+	codes =	
+	{
+		"A1":"XX","A2":"XX","A3":"XX","A4":"XX","A5":"XX","A6":"XX","A7":"XX","A8":"XX",
+		"B1":"XX","B2":"XX","B3":"XX","B4":"XX","B5":"XX","B6":"XX","B7":"XX","B8":"XX",
+		"C1":"XX","C2":"XX","C3":"XX","C4":"XX","C5":"XX","C6":"XX","C7":"XX","C8":"XX",
+		"D1":"XX","D2":"XX","D3":"XX","D4":"XX","D5":"XX","D6":"XX","D7":"XX","D8":"XX",
+		"E1":"XX","E2":"XX","E3":"XX","E4":"XX","E5":"XX","E6":"XX","E7":"XX","E8":"XX",
+		"F1":"XX","F2":"XX","F3":"XX","F4":"XX","F5":"XX","F6":"XX","F7":"XX","F8":"XX",
+		"G1":"XX","G2":"XX","G3":"XX","G4":"XX","G5":"XX","G6":"XX","G7":"XX","G8":"XX",
+		"H1":"XX","H2":"XX","H3":"XX","H4":"XX","H5":"XX","H6":"XX","H7":"XX","H8":"XX",
+		"I1":"XX","I2":"XX","I3":"XX","I4":"XX","I5":"XX","I6":"XX","I7":"XX","I8":"XX",
+		"J1":"XX","J2":"XX","J3":"XX","J4":"XX","J5":"XX","J6":"XX","J7":"XX","J8":"XX"
+	};
+
+	document.getElementById("left").focus();
+}
+
+function getValue(event, obj){
+	var evt = event ? event : (window.event ? window.event : null);
+	
+	obj.value=obj.value.toUpperCase();
+	if(obj.value.length==2){
+		var target = document.getElementById(obj.id+"Value");
+		for(var code in codes){
+ 			if(code==obj.value){
+				target.value=codes[code];
+				//if input letter or number
+				
+				if(evt.keyCode>47&&evt.keyCode<91){
+					getNextNode(obj).select();
+				}else{
+					obj.select();
+				}
+				return;
+			}
+		}
+		obj.value="";
+		target.value="";
+		obj.select();
+	}
+}
+
+function getNextNode(node){
+	var nextNode = node.nextSibling;
+	if(nextNode.nodeType==1) return nextNode;
+	else return getNextNode(nextNode);
+}
+
+</script>
+<style type="text/css">
+body
+{
+	background-color: #162027;
+	color: #999;
+	font-size:100;
+	text-align:center;
+	margin-top:100px;
+}
+
+input
+      {
+	font-size:100px;
+	height:120px;
+	width:150px;
+	text-align:center;
+      }
+
+</style>
+</head>
+
+<body onload="initialize();">
+<title>Securitycard Calculator</title>
+<div style="margin:100px;">
+<div style="margin:50px; font-size:30">
+	<span>Securitycard Calculator</span>
+	<span style="float:right;font-size:20;margin-right:100px;">
+	---by Taoracle Leurockit
+	</span>
+</div>
+<div>
+<input id="left" type="text" maxlength="2" onkeyup="getValue(event,this)" onfocus="this.select();" /> -
+<input id="center" type="text" maxlength="2" onkeyup="getValue(event,this)" onfocus="this.select();" /> -
+<input id="right" type="text" maxlength="2" onkeyup="getValue(event,this)" onfocus="this.select();" />
+<div>
+
+
+<div>
+<input id="leftValue" type="text" /> -
+<input id="centerValue"type="text" /> -
+<input id="rightValue" type="text" />
+</div>
+</div>
+</body>
+</html>
